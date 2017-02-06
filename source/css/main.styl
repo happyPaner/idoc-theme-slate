@@ -1,94 +1,80 @@
-@import('reset.styl');
+@import('_partial/reset.styl');
+// CSS reset
 global-reset()
-@import('vendor.styl');
-@import('markdown.styl');
-@import('highlight.styl');
+reset-html5()
 
-tocwidth = 220px
-nav-height = 49px
+@import('_partial/variables.styl');
+@import('_partial/markdown.styl');
+@import('_partial/highlight.styl');
 
 *
     box-sizing: border-box
+body 
+    background:#F6F6F6 url(../img/background.png)
 body,html
     height:100%
-    font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+    font-family: arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"
 .logo
-    float:left
-    padding: 0 20px 0 0px
+    float left
+    padding: 0 20px 0 0
     font-size: 24px
-    font-weight: 500;
-    color: #563d7c;
+    color: #35495e
+    font-family: "微软雅黑", Helvetica, arial, nimbussansl
+    font-weight: bold
+    img 
+        vertical-align: middle
+        margin: -4px 0 0 0
 
-.container
-    padding-left: 15px;
-    padding-right: 15px;
-    width: 1170px
-    margin 0 auto
-    &:before
-        display: table;
-        content: " ";
-    &:after
-        display: table;
-        content: " ";
-        clear: both;
-
-.navbar
-    z-index: 2
-    height: nav-height
-    line-height: nav-height
-    background-image: linear-gradient(to bottom,#fff 0,#f8f8f8 100%)
-    
-.bs-docs-header
-    background-image: linear-gradient(to bottom,#563d7c 0,#6f5499 100%)
-    background-repeat: repeat-x
+.nav-content
+    position: fixed
+    width: 100%
+    border-bottom: 1px solid #ddd
+    height: 71px
+    background:#F6F6F6 url(../img/background.png)
+    z-index: 100
+.nav
+    line-height: 70px
     position: relative
-    padding: 60px 0
-    color: #cdbfe3
-    font-size: 24px;
-    text-align: left;
-    text-shadow: 0 1px 0 rgba(0,0,0,.1)
-    h1,p 
-        margin-right: 380px
-    h1
-        color: #fff
-        font-family: inherit
-        font-weight: 500
-        margin: .67em 0
-        margin-bottom: 10px
-        margin-top: 0
-        font-size: 60px;
-        line-height: 1;
-        text-align: left
-    p 
-        margin-bottom: 0
-        font-weight: 300
-        line-height: 1.4
-.navbar
+    width: 90%
+    margin: 0 auto
+    @media mq-mobile
+        height initial
+        position: initial
+    a
+        text-decoration: none
+        color: inherit
+    a:link 
+        text-decoration: none
+        color: inherit
     ul  
         list-style: none
         position: relative
         display: inline-table
-        float: left
+        float: right
+        @media mq-mobile
+            display inline-flex
         ul
             display: none
-            background: #FFFFFF
-            border-radius: 0 0 5px 5px
-            padding: 3px
+            background: #D1D1D1
+            border-radius: 0px
+            padding: 0
             position: absolute
             top: 100%
-            z-index: 9
+            z-index 9
             li.active
                 a
-                    color: #463265
-                    background-color: #f9f9f9
+                    background: #4b545f
+                    color:#fff
                     line-height:29px
                     height:29px
+                    
             li 
                 float: none
-                border-bottom: 1px solid #F7F2FF
+                border-bottom: 1px solid #C8C8C8
                 position: relative
                 a:hover 
-                    color:#573E7D
+                    background: #4b545f
+                    color:#fff
             a
                 color: #fff
                 line-height: 29px
@@ -100,81 +86,127 @@ body,html
                 top:0
         li
             float: left
-            line-height: nav-height
+            padding-top: 15px
+            padding-bottom: 15px
+            line-height: 40px
             a
                 display: block
                 color: #757575
+                font-size: 18px
                 text-decoration: none
-                padding: 0 15px
+                margin: 0 20px
         li:hover
-            background: #F3F3F3
             a
                 color: #333
+                border-bottom: 2px solid #333
         li.active
             a
-                color: #463265
-                background-color: #F3F3F3
-                height: nav-height
+                color:#41b883
+                height: 40px
+                border-bottom: 2px solid #41b883
+
     ul li:hover > ul
         display: block
     ul:after
         content: ""
         clear: both
         display: block
+.warpper
+    width: 90%
+    padding: 71px 0 30px 0
+    height: 100%
+    margin: 0 auto
+    position: relative
+    @media mq-mobile
+        padding-top 0
 
-.markdown-body
-    margin-right:tocwidth
-    overflow: auto
-.page-toc
-    width: 200px
-    float: right
-    width: 220px
-    background: #fff
-    padding: 6px 0 25px 20px 
-    margin-top: 41px
-    border-left: 1px solid #EEE
-    font-family: "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,sans-serif !important
-    ul
-        list-style-type: none
-        margin: 0
-        a 
-            display: block
-            padding: 3px 0
-            color: #151515
-            text-decoration: none
-            font-weight:bold
-            line-height: 16px
-            font-size: 14px
-            &:hover
-                color:red
-                text-decoration: underline
-        li 
-            padding-left:3px
-            text-align:left
-            float: initial
+    .markdown-body
+        margin-left:tocwidth
+        @media mq-mobile
+            margin-left:0
+    .page-toc
+        height:calc(100% - 71px)
+        position: fixed
+        width:tocwidth
+        // background:#F6F6F6 url(../img/background.png)
+        padding: 10px 0px
+        border-right: 1px solid #ddd
+        overflow-y: auto
+        overflow-x: hidden
+        font-family:  Arial, sans-serif !important;
+        text-align: right
+        z-index: 1000
+        @media mq-mobile
+            display none
         ul
-            margin:0 0 0 10px
-            list-style-type: square
-            padding: 0 0 0 9px
+            list-style-type: none
+            a 
+                display: block
+                padding: 10px 0 4px 0
+                color: #000
+                font-family: "微软雅黑"
+                text-decoration: none
+                font-weight:bold
+                line-height: 22px
+                font-size: 18px
+                cursor: pointer
+                &:hover
+                    color:#ff6600
+                    text-decoration: underline
             li 
-                a 
-                    font-size:90%
-                    font-weight:normal
-                    border-bottom:0
-.copyright
-    border-top: 1px dashed #E9E9E9
-    padding: 6px 0 5px 2px
-    margin: 32px 0 0 0
-    line-height: 16px
-    font-size: 12px
-    color: #dfdfdf
-    a 
-        color: #D6DDF8
-        text-decoration: underline
-        &:hover
-            color:#333
+                padding-left:3px
+                text-align:left
+                list-style-type: none
+            ul
+                border-right: none
+                list-style-type: square
+                padding:0px
+                line-height: 14px
+                li 
+                    a 
+                        padding: 3px 0
+                        font-size:90%
+                        font-family: Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif
+                        border-bottom:0
+                        font-size: 16px
+                        color: #41b883
+                    ul
+                        padding-left: 10px
+                        li
+                            a
+                                padding: 1px 0
+                                font-size: 14px
+                                color: #222
+                                font-weight: normal
+                             ul
+                                // display: none
+                                li
+                                    a
+                                        color: #777
+                                        font-size: 13px
+
+    .copyright
+        border-top: 1px dashed #E9E9E9
+        padding: 6px 0 5px 2px
+        margin: 32px 0 0 0
+        line-height: 16px
+        font-size: 12px
+        color: #dfdfdf
+        a 
+            color: #D6DDF8
+            text-decoration: underline
+            &:hover
+                color:#333
 
 .forkgithub
+    position: absolute
+    z-index: 2
+    right: 0
+    background:url("../img/forkgithub.png") 14px -15px no-repeat
+    @media mq-mobile
+        display none
     a 
-        float right
-    
+        display:block
+        width:149px
+        height:149px
+        
